@@ -23,4 +23,4 @@ class Record(models.Model):
     member=models.ForeignKey(HKUMember, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "By "+self.member.name+" on "+self.datetime.strftime("%m/%d/%Y, %H:%M:%S")
+        return "By "+self.member.name+" from "+self.enter_datetime.strftime("%m/%d/%Y, %H:%M:%S")+" to "+self.leave_datetime.strftime("%m/%d/%Y, %H:%M:%S")
