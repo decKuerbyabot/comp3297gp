@@ -1,0 +1,321 @@
+openapi: 3.0.2
+info:
+  title: 'StudySafe Core'
+  version: '1.0'
+  descripion: 
+paths:
+  /core/api/venues/:
+    get:
+      operationId: listVenues
+      description: 'Shows all venues that is registered by HKU Covid Task Force'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Venue'
+          description: ''
+      tags:
+      - core
+    post:
+      operationId: createVenue
+      description: 'Create a new venue'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Venue'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+      tags:
+      - core
+  /core/api/venues/{id}/:
+    get:
+      operationId: retrieveVenue
+      description: 'Show all details of a venue specified by a unique identifier {id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this venue.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+      tags:
+      - core
+    put:
+      operationId: updateVenue
+      description: 'Update a venue'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this venue.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Venue'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+      tags:
+      - core
+    patch:
+      operationId: partialUpdateVenue
+      description: 'Partially update a venue'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this venue.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Venue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Venue'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+          description: ''
+      tags:
+      - core
+    delete:
+      operationId: destroyVenue
+      description: 'Delete a venue'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this venue.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - core
+  /core/api/records/:
+    get:
+      operationId: listRecords
+      description: 'List all visit records'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecordSerialzer'
+          description: ''
+      tags:
+      - core
+    post:
+      operationId: createRecord
+      description: 'Create a visit record'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSerialzer'
+          description: ''
+      tags:
+      - core
+  /core/api/records/{id}/:
+    get:
+      operationId: retrieveRecord
+      description: 'Show detail of a record specified by a unique identifier id'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this record.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSerialzer'
+          description: ''
+      tags:
+      - core
+    put:
+      operationId: updateRecord
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this record.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSerialzer'
+          description: ''
+      tags:
+      - core
+    patch:
+      operationId: partialUpdateRecord
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this record.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecordSerialzer'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordSerialzer'
+          description: ''
+      tags:
+      - core
+    delete:
+      operationId: destroyRecord
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this record.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - core
+components:
+  schemas:
+    Venue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        venue_code:
+          type: string
+          maxLength: 20
+        location:
+          type: string
+          maxLength: 150
+        type:
+          type: string
+          maxLength: 2
+        capacity:
+          type: integer
+      required:
+      - venue_code
+      - location
+      - type
+      - capacity
+    RecordSerialzer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        enter_datetime:
+          type: string
+          format: date-time
+        leave_datetime:
+          type: string
+          format: date-time
+        venue:
+          type: integer
+        member:
+          type: integer
+      required:
+      - enter_datetime
+      - leave_datetime
+      - venue
+      - member
