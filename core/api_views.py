@@ -29,7 +29,7 @@ class RecordViewSet(viewsets.ModelViewSet):
 
 class MemberViewSet(viewsets.ModelViewSet):
     queryset=HKUMember.objects.all()
-    serializer_class=RecordSerialzer
+    serializer_class=HKUmemberSerializer
 
 
 # @api_view(['GET',])
