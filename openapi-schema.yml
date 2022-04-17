@@ -318,3 +318,142 @@ components:
       - leave_datetime
       - venue
       - member
+
+
+paths:
+  /core/api/members/:
+    get:
+      operationId: listmembers
+      description: 'Shows all HKU member'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HKUMember'
+          description: ''
+      tags:
+      - core
+    post:
+      operationId: createHKUMember
+      description: 'Create a new HKU member'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HKUMember'
+          description: ''
+      tags:
+      - core
+
+/core/api/members/{id}/:
+    get:
+      operationId: retrieveHKUMember
+      description: 'Show all details of a HKU member record specified by a unique identifier {id}'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this HKU member.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HKUMember'
+          description: ''
+      tags:
+      - core
+    put:
+      operationId: updateHKUMember
+      description: 'Update a HKUMember'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this member.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HKUMember'
+          description: ''
+      tags:
+      - core
+    patch:
+      operationId: partialUpdateHKUMember
+      description: 'Partially update a HKUMember'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this HKUMember.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HKUMember'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HKUMember'
+          description: ''
+      tags:
+      - core
+    delete:
+      operationId: destroyHKUMember
+      description: 'Delete a HKUMember'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this HKUMemberç.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - core
