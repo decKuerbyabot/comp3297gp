@@ -2,12 +2,11 @@ openapi: 3.0.2
 info:
   title: 'StudySafe Core'
   version: '1.0'
-  descripion: 
 paths:
   /core/api/venues/:
     get:
       operationId: listVenues
-      description: 'Shows all venues that is registered by HKU Covid Task Force'
+      description: 'Shows all venues registed by HKU Covid Task Force'
       parameters: []
       responses:
         '200':
@@ -19,7 +18,7 @@ paths:
                   $ref: '#/components/schemas/Venue'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     post:
       operationId: createVenue
       description: 'Create a new venue'
@@ -43,7 +42,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
       tags:
-      - core
+      - StudySafe Core
   /core/api/venues/{id}/:
     get:
       operationId: retrieveVenue
@@ -63,7 +62,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     put:
       operationId: updateVenue
       description: 'Update a venue'
@@ -93,7 +92,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     patch:
       operationId: partialUpdateVenue
       description: 'Partially update a venue'
@@ -123,7 +122,7 @@ paths:
                 $ref: '#/components/schemas/Venue'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     delete:
       operationId: destroyVenue
       description: 'Delete a venue'
@@ -138,7 +137,7 @@ paths:
         '204':
           description: ''
       tags:
-      - core
+      - StudySafe Core
   /core/api/records/:
     get:
       operationId: listRecords
@@ -154,7 +153,7 @@ paths:
                   $ref: '#/components/schemas/RecordSerialzer'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     post:
       operationId: createRecord
       description: 'Create a visit record'
@@ -178,7 +177,7 @@ paths:
                 $ref: '#/components/schemas/RecordSerialzer'
           description: ''
       tags:
-      - core
+      - StudySafe Core
   /core/api/records/{id}/:
     get:
       operationId: retrieveRecord
@@ -198,7 +197,7 @@ paths:
                 $ref: '#/components/schemas/RecordSerialzer'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     put:
       operationId: updateRecord
       description: ''
@@ -228,7 +227,7 @@ paths:
                 $ref: '#/components/schemas/RecordSerialzer'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     patch:
       operationId: partialUpdateRecord
       description: ''
@@ -258,7 +257,7 @@ paths:
                 $ref: '#/components/schemas/RecordSerialzer'
           description: ''
       tags:
-      - core
+      - StudySafe Core
     delete:
       operationId: destroyRecord
       description: ''
@@ -273,7 +272,7 @@ paths:
         '204':
           description: ''
       tags:
-      - core
+      - StudySafe Core
 components:
   schemas:
     Venue:
