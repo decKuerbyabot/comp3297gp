@@ -9,6 +9,7 @@ djangorestframework = "*"
 pyyaml = "*"
 uritemplate = "*"
 gunicorn = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

@@ -77,9 +77,14 @@ WSGI_APPLICATION = 'StudySafe.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd4qsrcu4a6q20n',
+        'USER': 'rabvlsoonhmtkf',
+        'PASSWORD': 'e657277dc699e41c5f7e20670f9faf8bab937bc65903f2a7a046a840baa0abf4',
+        'HOST': 'ec2-52-73-155-171.compute-1.amazonaws.com',
+        'PORT':  5432
     }
+
 }
 
 
