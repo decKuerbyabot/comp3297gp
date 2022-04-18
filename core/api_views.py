@@ -37,7 +37,7 @@ class VenueViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def destroy(self, request, venue_code):
-        t=Venue.objects.get(venue_code)
+        t=Venue.objects.get(venue_code=venue_code)
         t.delete()
         return Response({"http-method": "DELETE"})
 
