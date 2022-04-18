@@ -7,7 +7,7 @@ class Venue(models.Model):
         LECTURE_THEATRE = 'LT', _('Lecture Theatre')
         CLASSROOM = 'CR', _('Classroom')
         TUTORIAL_ROOM = 'TR', _('Tutorial Room')
-    venue_code=models.CharField(primary_key=True, max_length=20)
+    venue_code=models.CharField(max_length=20)
     location=models.CharField(max_length=150)
     # type=models.CharField(max_length=2)
     type=models.CharField(
