@@ -14,5 +14,5 @@ urlpatterns=[
 # print(router.urls)
 
 urlpatterns.extend([
-    path('api/venues/<str:venue_code>', VenueViewSet.as_view({"get":"retrieve"}))
+    path('api/venues/<str:venue_code>', VenueViewSet.as_view({"get":"retrieve", "put": "update", "delete": "destroy"}))
 ])

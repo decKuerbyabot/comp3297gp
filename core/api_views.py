@@ -24,12 +24,22 @@ class VenueViewSet(viewsets.ModelViewSet):
     queryset=Venue.objects.all()
     serializer_class=VenueSerializer
 
-    @staticmethod
-    def retrieve(request, venue_code):
+    def retrieve(self, request, venue_code):
         queryset=Venue.objects.get(venue_code=venue_code)
         serializer=VenueSerializer(queryset)
-        print("Hello bug")
         return Response(serializer.data)
+
+    def update(self, request, venue_code):
+        """Handles updating a venue"""
+        Venue.objects.filter(venue_code=request.data['venue_code']).update(location=request.data['location'], type=request.data['type'], capacity=request.data['capacity'])
+        t=Venue.objects.get(venue_code=request.data['venue_code'])
+        serializer=VenueSerializer(t)
+        return Response(serializer.data)
+
+    def destroy(self, request, venue_code):
+        t=Venue.objects.get(venue_code)
+        t.delete()
+        return Response({"http-method": "DELETE"})
 
 class RecordViewSet(viewsets.ModelViewSet):
     queryset=Record.objects.all()
