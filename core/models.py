@@ -1,10 +1,19 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class Venue(models.Model):
+    class VenueType(models.TextChoices):
+        LECTURE_THEATRE = 'LT', _('Lecture Theatre')
+        CLASSROOM = 'CR', _('Classroom')
+        TUTORIAL_ROOM = 'TR', _('Tutorial Room')
     venue_code=models.CharField(primary_key=True, max_length=20)
     location=models.CharField(max_length=150)
-    type=models.CharField(max_length=2)
+    # type=models.CharField(max_length=2)
+    type=models.CharField(
+        max_length=2,
+        choices=VenueType.choices
+    )
     capacity=models.IntegerField()
     def __str__(self):
         return self.venue_code
