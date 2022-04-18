@@ -14,3 +14,9 @@ class VenueSerializer(serializers.ModelSerializer):
     class Meta:
         model=Venue
         fields = '__all__'
+
+
+class HKUmemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=HKUMember
+        fields = '__all__'
