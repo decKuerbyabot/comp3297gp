@@ -20,6 +20,7 @@ def get_close_contacts(request):
     pass
 
 class VenueViewSet(viewsets.ModelViewSet):
+    lookup_field='venue_code'
     queryset=Venue.objects.all()
     serializer_class=VenueSerializer
 

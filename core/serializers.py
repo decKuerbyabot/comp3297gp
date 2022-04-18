@@ -11,6 +11,7 @@ class RecordSerialzer(serializers.ModelSerializer):
         fields='__all__'
 
 class VenueSerializer(serializers.ModelSerializer):
+    venue_code = serializers.Field(source='venue_code')
     class Meta:
         model=Venue
         fields = '__all__'
