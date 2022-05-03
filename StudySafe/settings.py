@@ -76,22 +76,22 @@ WSGI_APPLICATION = 'StudySafe.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'db576gbihm0h30',
-    #     'USER': 'gstczbwqrxcjcj',
-    #     'PASSWORD': '8f2af859c1b5230069da799ba59fcd147bb3ebe64b6a108a0e72fcf07b1f5245',
-    #     'HOST': 'ec2-54-157-79-121.compute-1.amazonaws.com',
-    #     'PORT':  5432
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'studysafe',
-        'USER': 'developer1',
-        'PASSWORD': 'p@ssw0rd',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db576gbihm0h30',
+        'USER': 'gstczbwqrxcjcj',
+        'PASSWORD': '8f2af859c1b5230069da799ba59fcd147bb3ebe64b6a108a0e72fcf07b1f5245',
+        'HOST': 'ec2-54-157-79-121.compute-1.amazonaws.com',
         'PORT':  5432
     }
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'studysafe',
+#         'USER': 'developer1',
+#         'PASSWORD': 'p@ssw0rd',
+#         'HOST': 'localhost',
+#         'PORT':  5432
+#     }
 }
 
 
