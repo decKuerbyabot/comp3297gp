@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
+from django.utils.timezone import now
+from datetime import date
 # Create your models here.
 class Venue(models.Model):
     class VenueType(models.TextChoices):
@@ -21,6 +22,7 @@ class Venue(models.Model):
 class HKUMember(models.Model):
     hku_id=models.CharField(primary_key=True, max_length=10)
     name=models.CharField(max_length=150)
+    diagnoseDate=models.DateField(default=now)
     def __str__(self):
         return self.name
 
