@@ -30,9 +30,30 @@ def get_venues_visited(request, hku_id):
     return Response(venues)
 
 #this function should get the close contacts as defined by hku
+@api_view(('GET',))
+@renderer_classes((JSONRenderer,))
 def get_close_contacts(request, hku_id):
+    # this function should get the close contacts as defined by hku
+    member = HKUMember.objects.get(hku_id=hku_id)
+    diagnoseDate = member.diagnoseDate
+    days=timedelta(days=2)
+    start_date = diagnoseDate - days # need to make sure it is 00:00
+    # time aware warning https://shanxiaoi.top/post/2021/06/22/_1407290762697248768/ 
+    from django.db.models import DurationField, F, ExpressionWrapper
+    import pytz
+    visit_record_duration_annotated = Record.objects.annotate(
+        diff=ExpressionWrapper(F('leave_datetime') - F('enter_datetime'), output_field=DurationField())
+    )
+    visit_records=visit_record_duration_annotated.filter(member__hku_id=member.hku_id,
+     enter_datetime__gte=datetime.combine(start_date, time.min),
+      leave_datetime__lte=diagnoseDate,
+      diff__gte=timedelta(minutes=30))
 
-    pass
+    print(visit_records)
+    
+
+    infected_id = [v.member.hku_id for v in visit_records]
+    return Response(infected_id)
 
 class VenueViewSet(viewsets.ModelViewSet):
     # lookup_field='venue_code'
