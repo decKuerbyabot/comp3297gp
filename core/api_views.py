@@ -46,25 +46,44 @@ def get_close_contacts(request):
     days=timedelta(days=2)
     infectuous_date = diagnoseDate - days # need to make sure it is 00:00
     # time aware warning https://shanxiaoi.top/post/2021/06/22/_1407290762697248768/ 
-    records_in_range = Record.objects.filter(dateTime__gte=datetime.combine(infectuous_date, time.min), dateTime__lte=datetime.combine(diagnoseDate, time.max))
-    potentials_id = list(set([v.member.hku_id for v in records_in_range])) # find unique ids
-    print("records:", records_in_range)
-    print('potential_id', potentials_id)
+    print(infectuous_date, diagnoseDate)
+
+    # Visited, In range
+    records_by_infectious_member = Record.objects.filter(member__hku_id=hku_id, 
+        dateTime__gte=datetime.combine(infectuous_date, time.min), 
+        dateTime__lte=datetime.combine(diagnoseDate, time.max))
+    
+    condition_pair = set()
+    for r in records_by_infectious_member:
+        date_min = datetime.combine(r.dateTime, time.min)
+        date_max = datetime.combine(r.dateTime, time.max)
+        venue = r.venue
+        condition_pair.add((venue, date_min, date_max))
+        print(f"Condition: ppl in {venue} in {date_min}")
+
+    result = set()
     threshold = timedelta(minutes=30)
-    result = []
-    for id in potentials_id:
-        enter_events = records_in_range.filter(member__hku_id=id, event='Entry')
-        exit_events =  records_in_range.filter(member__hku_id=id, event='Exit')
-        # To ensure the entry records match the exit record
-        print("length check: ", len(enter_events), len(exit_events), 'Length Match:', len(enter_events)==len(exit_events)) 
-        for i in range(min(len(enter_events), len(exit_events))): # to avoid index out of range
-            duration = exit_events[i].dateTime - enter_events[i].dateTime # Check each pair of entry, leave event
-            print(f"{id}: {duration}")
-            if duration >= threshold:
-               result.append(id)
-               print(f"{id} confirmed")
-               break
-    return Response(result)
+    for venue, date_min, date_max in condition_pair:
+        records = Record.objects.filter(venue=venue, dateTime__gte=date_min, dateTime__lte=date_max) # record in range and visited
+        potential_ids = list(set([r.member.hku_id for r in records])) # Get unique potential infectious member id
+        # Check the member's stay duration
+        for id in potential_ids:
+            enter_events = records.filter(member__hku_id=id, event='Entry')
+            exit_events =  records.filter(member__hku_id=id, event='Exit')
+            # To ensure the entry records match the exit record (we may assume the entry and exit always appear in pair)
+            print("length check: ", len(enter_events), len(exit_events), 'Length Match:', len(enter_events)==len(exit_events)) 
+            for i in range(min(len(enter_events), len(exit_events))): # to avoid index out of range
+                duration = exit_events[i].dateTime - enter_events[i].dateTime # Check each pair of entry, leave event
+                print(f"{id}: {duration}")
+                if duration >= threshold:
+                    result.add(id)
+                    print(f"{id} confirmed")
+                    break
+    if hku_id in result:
+        print("remove the infectious member himself")
+        result.remove(hku_id)
+
+    return Response(list(result))
 
 class VenueViewSet(viewsets.ModelViewSet):
     # lookup_field='venue_code'
