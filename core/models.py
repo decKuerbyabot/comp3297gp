@@ -41,3 +41,13 @@ class Record(models.Model):
 
     def __str__(self):
         return "By "+self.member.name+" from "+self.dateTime.strftime("%Y/%m/%dT%H:%M:%S")
+
+
+class User(models.Model):
+    username=models.CharField(unique=True, max_length=20)
+    password=models.CharField(max_length=20)
+    first_name=models.CharField(max_length=20, null=True, blank=True)
+    last_name=models.CharField(max_length=20, null=True, blank=True)
+    email=models.CharField(max_length=40, null=True, blank=True)
+    def __str__(self):
+        return f"{self.username} - {self.first_name}"
