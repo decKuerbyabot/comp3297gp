@@ -16,18 +16,31 @@ from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 @renderer_classes((JSONRenderer,))
 def get_venues_visited(request, hku_id):
     '''it catches the hku_id in the url as parameter, find out the venues that the member visited while infectuous and returns a list of the venue codes'''
+
+    # get particular HKUMember object and Diagonse object
     member=HKUMember.objects.get(hku_id=hku_id)
-    diagnoseDate=member.diagnoseDate
+    memberID=Diagonse.objects.get(members=hku_id)
+    # retrive the diagnoseDate
+    diagnoseDate=memberID.diagnoseDate
+    # setup the infectios dates
     days=timedelta(2)
-    days_=timedelta(14)
+    #days_=timedelta(14)
     # date the member first became infectuous
     infectuous_date=diagnoseDate-days
+    '''
+    # original code
     # date the member become safe
     safe_date=diagnoseDate+days_
     visit_records=Record.objects.filter(member__hku_id=member.hku_id, enter_datetime__lte=datetime.combine(safe_date, time.max), enter_datetime__gte=datetime.combine(infectuous_date, time.min))
-    # get the list of venue codes
+    '''
+    
+    # find the venue that member visited in infectious period
+    visit_records=Record.objects.filter(member__hku_id=member.hku_id, enter_datetime__gte=datetime.combine(infectuous_date, time.min))
+
+    # get the list of hku_id and venue codes
     venues=[visit_record.venue.venue_code for visit_record in visit_records]
-    return Response(venues)
+    responseData = [hku_id, diagnoseDate, sorted(venues)]
+    return Response(responseData)
 
 #this function should get the close contacts as defined by hku
 @api_view(('GET',))
@@ -68,4 +81,8 @@ class RecordViewSet(viewsets.ModelViewSet):
 class MemberViewSet(viewsets.ModelViewSet):
     queryset=HKUMember.objects.all()
     serializer_class=HKUmemberSerializer
+
+class DiagonseViewSet(viewsets.ModelViewSet):
+    queryset=Diagonse.objects.all()
+    serializer_class=DiagonseSerializer
 
