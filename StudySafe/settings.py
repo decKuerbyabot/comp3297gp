@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'core',
+    'traces'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'StudySafe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,10 +80,10 @@ WSGI_APPLICATION = 'StudySafe.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db576gbihm0h30',
-        'USER': 'gstczbwqrxcjcj',
-        'PASSWORD': '8f2af859c1b5230069da799ba59fcd147bb3ebe64b6a108a0e72fcf07b1f5245',
-        'HOST': 'ec2-54-157-79-121.compute-1.amazonaws.com',
+        'NAME': 'd76i08m6l4fcqj',
+        'USER': 'bykiernkgakndx',
+        'PASSWORD': '699792582d6f27a9329bc76448d4af78b0015bd4ea8323eee392cad923d76f12',
+        'HOST': 'ec2-52-4-104-184.compute-1.amazonaws.com',
         'PORT':  5432
     }
     # 'default': {
